@@ -56,14 +56,18 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Website" type="LineEdit" parent="MarginContainer/ScrollContainer/PanelContainer/VBoxContainer/HBoxContainer9/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_l23yv")
-text = "https://codeload.github.com/"
+text = "https://github.com/godotengine/godot"
 
-[node name="Button" type="Button" parent="MarginContainer/ScrollContainer/PanelContainer/VBoxContainer/HBoxContainer9/HBoxContainer"]
+[node name="DownloadSourceCodeBtn" type="Button" parent="MarginContainer/ScrollContainer/PanelContainer/VBoxContainer/HBoxContainer9/HBoxContainer"]
 layout_mode = 2
 text = "拉取源码"
+
+[node name="DownloadSourceCodeRequest" type="HTTPRequest" parent="MarginContainer/ScrollContainer/PanelContainer/VBoxContainer/HBoxContainer9"]
+unique_name_in_owner = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
@@ -227,6 +231,7 @@ size_flags_horizontal = 3
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+button_pressed = true
 text = "启用"
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/ScrollContainer/PanelContainer/VBoxContainer"]
@@ -293,6 +298,9 @@ custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
+[connection signal="text_changed" from="MarginContainer/ScrollContainer/PanelContainer/VBoxContainer/HBoxContainer9/HBoxContainer/Website" to="." method="_on_website_text_changed"]
+[connection signal="pressed" from="MarginContainer/ScrollContainer/PanelContainer/VBoxContainer/HBoxContainer9/HBoxContainer/DownloadSourceCodeBtn" to="." method="_on_download_source_code_btn_pressed"]
+[connection signal="request_completed" from="MarginContainer/ScrollContainer/PanelContainer/VBoxContainer/HBoxContainer9/DownloadSourceCodeRequest" to="." method="_on_download_source_code_request_request_completed"]
 [connection signal="text_changed" from="MarginContainer/ScrollContainer/PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer/SourceCodeEdit" to="." method="_on_source_code_edit_text_changed"]
 [connection signal="pressed" from="MarginContainer/ScrollContainer/PanelContainer/VBoxContainer/HBoxContainer/HBoxContainer/SelectSourceCodeBtn" to="." method="_on_select_source_code_btn_pressed"]
 [connection signal="text_changed" from="MarginContainer/ScrollContainer/PanelContainer/VBoxContainer/HBoxContainer2/HBoxContainer/BuildEdit" to="." method="_on_build_edit_text_changed"]

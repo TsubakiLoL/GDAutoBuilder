@@ -29,13 +29,13 @@ var _config_file_cache:ConfigFile
 
 var website:String:
 	get():
-		return _config_file.get_value("godot","source_code_path","")
+		return _config_file.get_value("godot","website","https://github.com/godotengine/godot")
 	set(value):
-		_config_file.set_value("godot","source_code_path",value)
+		_config_file.set_value("godot","website",value)
 		save_config_file()
 		#同步到UI
-		if %SourceCodeEdit.text!=value:
-			%SourceCodeEdit.text=value
+		if %Website.text!=value:
+			%Website.text=value
 
 ##Godot源码目录
 var godot_source_code_path:String:
@@ -137,7 +137,7 @@ func _ready() -> void:
 	use_thread=use_thread
 	use_lto=use_lto
 	use_debug=use_debug
-	
+	website=website
 	
 	pass
 
@@ -214,6 +214,10 @@ func _on_use_debug_check_box_toggled(toggled_on: bool) -> void:
 
 
 
+func _on_website_text_changed(new_text: String) -> void:
+	if website!=new_text:
+		website=new_text
+	pass # Replace with function body.
 
 
 
@@ -331,5 +335,12 @@ func get_godot_hash()->String:
 ##获取源码下载路径
 func get_source_code_download_path()->String:
 	#https://github.com/godotengine/godot/archive/%s.zip
-	
-	return ""
+	return website.path_join("archive/%s.zip"%[get_godot_hash()])
+
+
+func _on_download_source_code_btn_pressed() -> void:
+	pass # Replace with function body.
+
+
+func _on_download_source_code_request_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:
+	pass # Replace with function body.
